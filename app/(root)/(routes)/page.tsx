@@ -1,7 +1,8 @@
 'use client'
 
-import { useStoreModal } from '@/hooks/use-store-modal'
 import React from 'react'
+
+import { useStoreModal } from '@/hooks/use-store-modal'
 
 export default function SetupPage() {
   const onOpen = useStoreModal((state) => state.onOpen)
@@ -13,5 +14,5 @@ export default function SetupPage() {
     }
   }, [isOpen, onOpen])
 
-  return <div className="p-4"></div>
+  return null
 }
