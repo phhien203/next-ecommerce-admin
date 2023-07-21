@@ -41,10 +41,9 @@ export const StoreModal = () => {
       setLoading(true)
 
       const res = await axios.post(`/api/stores`, values)
-      console.log(res.data)
-      toast({
-        description: 'Store created.',
-      })
+
+      // do a full refresh to ensure db is in sync
+      window.location.assign(`/${res.data.id}`)
     } catch (error) {
       console.log('STORE_MODAL', error)
       toast({
@@ -86,13 +85,13 @@ export const StoreModal = () => {
               />
 
               <div className="pt-6 space-x-2 flex items-center justify-end">
-                {/* <Button
+                <Button
                   disabled={loading}
                   variant="outline"
                   onClick={storeModal.onClose}
                 >
                   Cancel
-                </Button> */}
+                </Button>
                 <Button disabled={loading} type="submit">
                   Continue
                 </Button>
