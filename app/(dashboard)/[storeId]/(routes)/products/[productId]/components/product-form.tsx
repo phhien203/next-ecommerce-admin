@@ -48,7 +48,9 @@ const formSchema = z.object({
 type ProductFormValues = z.infer<typeof formSchema>
 
 interface ProductFormProps {
-  initialData: (Product & { images: Image[] }) | null
+  initialData:
+    | (Omit<Product, 'price'> & { images: Image[]; price: number })
+    | null
   categories: Category[]
   sizes: Size[]
   colors: Color[]
@@ -74,21 +76,16 @@ export default function ProductForm({
 
   const form = useForm<ProductFormValues>({
     resolver: zodResolver(formSchema),
-    defaultValues: initialData
-      ? {
-          ...initialData,
-          price: parseFloat(String(initialData?.price)),
-        }
-      : {
-          name: '',
-          price: 0,
-          isFeatured: false,
-          isArchived: false,
-          images: [],
-          categoryId: '',
-          sizeId: '',
-          colorId: '',
-        },
+    defaultValues: initialData || {
+      name: '',
+      price: 0,
+      isFeatured: false,
+      isArchived: false,
+      images: [],
+      categoryId: '',
+      sizeId: '',
+      colorId: '',
+    },
   })
 
   const onSubmit = async (data: ProductFormValues) => {

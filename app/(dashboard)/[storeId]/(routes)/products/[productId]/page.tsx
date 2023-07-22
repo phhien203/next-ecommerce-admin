@@ -40,7 +40,14 @@ export default async function ProductDetailsPage({
           categories={categories}
           sizes={sizes}
           colors={colors}
-          initialData={product}
+          initialData={
+            product
+              ? {
+                  ...product,
+                  price: parseFloat(String(product?.price)),
+                }
+              : null
+          }
         />
       </div>
     </div>
