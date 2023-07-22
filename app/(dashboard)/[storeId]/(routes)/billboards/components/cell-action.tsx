@@ -44,7 +44,7 @@ export default function CellAction({ data }: { data: BillboardColumn }) {
     } catch (error) {
       toast({
         variant: 'destructive',
-        title: 'Cannot remove store',
+        title: 'Cannot remove billboard',
         description:
           'Make sure you removed all categories using this billboard first.',
       })

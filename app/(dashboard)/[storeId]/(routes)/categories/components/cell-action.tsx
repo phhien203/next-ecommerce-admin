@@ -29,24 +29,24 @@ export default function CellAction({ data }: { data: CategoryColumn }) {
   const onCopy = (id: string) => {
     navigator.clipboard.writeText(id)
     toast({
-      description: 'Billboard ID copied to the clipboard.',
+      description: 'Category ID copied to the clipboard.',
     })
   }
 
   const onDelete = async () => {
     try {
       setLoading(true)
-      await axios.delete(`/api/${params.storeId}/billboards/${data.id}`)
+      await axios.delete(`/api/${params.storeId}/categories/${data.id}`)
       router.refresh()
       toast({
-        description: 'Billboard deleted.',
+        description: 'Category deleted.',
       })
     } catch (error) {
       toast({
         variant: 'destructive',
-        title: 'Cannot remove store',
+        title: 'Cannot remove category',
         description:
-          'Make sure you removed all categories using this billboard first.',
+          'Make sure you removed all products using this category first.',
       })
     } finally {
       setOpen(false)
@@ -85,7 +85,7 @@ export default function CellAction({ data }: { data: CategoryColumn }) {
           <DropdownMenuItem
             className="cursor-pointer"
             onClick={() =>
-              router.push(`/${params.storeId}/billboards/${data.id}`)
+              router.push(`/${params.storeId}/categories/${data.id}`)
             }
           >
             <EditIcon className="mr-2 w-4 h-4" />
